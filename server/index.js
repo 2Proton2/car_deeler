@@ -8,7 +8,8 @@ require('./config/database');
 /**
  * My endpoints of the website  @routes
  */
-
+app.use('/cars', require('./routers/cars'));
+app.use('/user', require('./routers/user'));
 
 /**
  * I woould like to communicate with server and client in @json format
