@@ -116,14 +116,6 @@ const userSchema = mongoose.Schema({
 	photo : {
         type: Array,
         required: true,
-        validate : {
-            validator: (value) => {
-                if(!(value.length === 4)){
-                    throw new Error(`%%% All required images are uploaded %%%`);
-                }
-            },
-            message: `Please upload all the required images`
-        }
     }
 })
 
