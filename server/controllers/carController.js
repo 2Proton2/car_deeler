@@ -38,7 +38,7 @@ async function getOldParticular(req, res){
     }
 }
 
-async function postNewParticular(req, res){
+async function applyForNewCar(req, res){
     try{
         console.log('backend : hey I am enquiring for a NEW PARTICULAR car', req.params.name);
         res.send({message : `hey I am enquiring for a NEW PARTICULAR car ${req.params.name}`});
@@ -48,10 +48,40 @@ async function postNewParticular(req, res){
     }
 }
 
-async function postOldParticular(req, res){
+async function applyForOldCar(req, res){
     try{
-        console.log('backend : hey I am enquiring for a OLD PARTICULAR car', req.params.name);
-        res.send({message : `hey I am enquiring for a OLD PARTICULAR car ${req.params.name}`});
+        console.log('backend : Adding a Old car', req.params.name);
+        res.send({message : `Adding a old car ${req.params.name}`});
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+async function addCar(req, res){
+    try{
+        console.log('backend : Adding a New car', req.params.name);
+        res.send({message : `Adding a New car ${req.params.name}`});
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+async function getMyInventoryCarList(req, res){
+    try{
+        console.log('backend : bring all your inventory list', req.params.name);
+        res.send({message : `bring all your inventory list ${req.params.name}`});
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+async function updateACar(req, res){
+    try{
+        console.log('backend : updating your car details', req.params.name);
+        res.send({message : `updating your car details ${req.params.name}`});
     }
     catch(err){
         console.log(err)
@@ -63,6 +93,9 @@ module.exports = {
     getOld,
     getNewParticular,
     getOldParticular,
-    postNewParticular,
-    postOldParticular
+    applyForNewCar,
+    applyForOldCar,
+    addCar,
+    getMyInventoryCarList,
+    updateACar
 };
