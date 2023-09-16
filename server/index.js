@@ -10,6 +10,8 @@ require('./config/database');
  */
 app.use('/cars', require('./routers/cars'));
 app.use('/user', require('./routers/user'));
+app.use('/enquiry', require('./routers/enquiry'));
+app.use('/dealer', require('./routers/dealer'));
 
 /**
  * I woould like to communicate with server and client in @json format
