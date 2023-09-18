@@ -1,10 +1,32 @@
+const userSchema = require('../models/user');
+
 async function signingUp(req, res){
     try{
-        console.log('backend : Signing up the user');
-        res.send({message : 'Signing up the user'});
+        const userInput = req.body;
+        const { type } = req.query;
+        const modifiedObject = { "type": type, ...userInput };
+
+        let emailExistence = await userSchema.find({ emailid: `${modifiedObject.emailid}` });
+        if(emailExistence){
+            throw new Error("Email already exists in database");
+        }
+
+        const queryObject = new userSchema(modifiedObject);
+
+        const result = await queryObject.save();
+
+        if(result){
+            res.status(201).json("Saved Succefully");
+        }
     }
     catch(err){
         console.log(err);
+        if(err.message === "Email already exists in database"){
+            res.status(409).send(err.message);
+        }
+        else{
+            res.status(422).json({"message": err.message});
+        }
     }
 }
 
@@ -46,6 +68,10 @@ async function getUserDetails(req, res){
     catch(err){
         console.log(err);
     }
+}
+
+async function queryFindOne(){
+
 }
 
 module.exports = {
