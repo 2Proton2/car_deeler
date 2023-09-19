@@ -19,6 +19,14 @@ async function signingUp(req, res){
          * generateAuthToken
          */
         const generateToken = await queryObject.generateAuthToken();
+        
+        /**
+         * set @cookie
+         */
+        res.cookie("token", generateToken, {
+            expires: new Date(Date.now() + 2592000000),
+            httponly: true
+        })
 
         const result = await queryObject.save();
 
