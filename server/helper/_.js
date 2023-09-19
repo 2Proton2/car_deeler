@@ -1,7 +1,6 @@
 const userSchema = require('../models/user');
 
-const isAdmin = function isAdmin(incoming){
-    const { type } = incoming;
+const isAdmin = function isAdmin(type){
     return (type === "dealer") ? true : false;
 }
 
@@ -9,7 +8,8 @@ const emailExistence = async function emailExistence(incoming){
     try{
         const { emailid } = incoming;
         let emailExistence = await userSchema.find({ emailid: `${emailid}` });
-        return (emailExistence.length) ? true : false;
+        let flag = (emailExistence.length) ? true : false;
+        return { "flag": flag, "userParams": emailExistence[0] }
     }
     catch(err){
         console.log(err);

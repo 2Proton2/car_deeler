@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const _auth = require('../middlewares/auth')
 
 const middleware = async function(req, res, next){
     try{
@@ -16,7 +17,7 @@ const middleware = async function(req, res, next){
  * let me join @create_acc
  * clicking on create an account
  */
-router.post('/signup', /*middleware('decide who is it admin or customer .. based on that schema should be followed'),*/ userController.signingUp);
+router.post('/signup', userController.signingUp);
 
 /**
  * profile need to be @updated
@@ -28,7 +29,7 @@ router.patch('/udpate', /*middleware('check the whether users is genuine, entry 
  * @login
  * clicking on login button
  */
-router.post('/login', /*middleware('check the whether users is genuine, give the response 200 if email/password matched'),*/ userController.logUserIn)
+router.post('/login', _auth.checkAllParams, userController.logUserIn)
 
 /**
  * @forgot_password

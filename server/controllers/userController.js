@@ -1,4 +1,5 @@
 const userSchema = require('../models/user');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const _ = require('../helper/_')
 
@@ -9,7 +10,7 @@ async function signingUp(req, res){
         const modifiedObject = { "type": type, ...userInput };
 
         const emailExistence = await _.emailExistence(modifiedObject);
-        if(emailExistence){
+        if(emailExistence.flag){
             throw new Error("Email already exists in database");
         }
 
@@ -52,16 +53,47 @@ async function updateUserDetails(req, res){
     }
     catch(err){
         console.log(err);
+        res.status(422).send({ message: err.message })
     }
 }
 
 async function logUserIn(req, res){
     try{
-        console.log('backend : logging in user ');
-        res.send({message : 'logging in user '});
+        const { emailid, password } = req.body;
+        const { type } = req.param;
+
+        const emailExistence = await _.emailExistence(req.body);
+
+        if(!emailExistence.flag){
+            throw new Error("Invalid Credentials");
+        }
+
+        /**
+         * compare the hashing of the password
+         */
+        const isMatch = await bcrypt.compare(password, emailExistence.userParams.password);
+
+        if(isMatch){
+            const admin = _.isAdmin(type);
+
+            /**
+             * generate @token and set @cookie if headers donot consist of cookie
+             */            
+            if(!req.headers.cookie){
+                const generateToken = await emailExistence.userParams.generateAuthToken();
+                res.cookie("token", generateToken, {
+                    expires: new Date(Date.now() + 2592000000),
+                    httponly: true
+                })
+            }
+            res.status(200).send({message : 'Successfully logged in'});
+        }
+        else{
+            throw new Error("Authentication Failed");
+        }
     }
     catch(err){
-        console.log(err);
+        res.status(422).send({ message: err.message })
     }
 }
 
@@ -72,6 +104,7 @@ async function forgotPassword(req, res){
     }
     catch(err){
         console.log(err);
+        res.status(422).send({ message: err.message })
     }
 }
 
@@ -82,6 +115,7 @@ async function getUserDetails(req, res){
     }
     catch(err){
         console.log(err);
+        res.status(422).send({ message: err.message })
     }
 }
 
