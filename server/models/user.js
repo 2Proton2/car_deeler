@@ -1,7 +1,9 @@
 require('../config/database');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const userSchema = mongoose.Schema({
     type: {
@@ -102,8 +104,37 @@ const userSchema = mongoose.Schema({
 	photo : {
         type: Array,
         required: true,
-    }
+    },
+    tokens: [
+        {
+            token: {
+                type: String,
+                required: true,
+            },
+            createdAt: {
+                type: Date,
+                default: Date.now()
+            }
+        }
+    ]
 })
+
+/**
+ * generating token
+ */
+userSchema.methods.generateAuthToken = async function(){
+    try{
+        const tokenGenerated = await jwt.sign({ id: this._id}, SECRET_KEY);
+        console.log('Token generated successfully');
+        this.tokens = this.tokens.concat({ token: tokenGenerated });
+        await this.save();
+        console.log('Token saved successfully');
+        return tokenGenerated;
+    }
+    catch(err){
+        console.log(err);
+    }
+}
 
 /**
  * Password @hash logic
@@ -111,6 +142,7 @@ const userSchema = mongoose.Schema({
 userSchema.pre('save', async function(next) {
     if(this.isModified('password')){
         this.password = await bcrypt.hash(this.password, 12);
+        console.log('Password hased successfully');
     }
     next();
 });

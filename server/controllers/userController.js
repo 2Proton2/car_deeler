@@ -1,4 +1,5 @@
 const userSchema = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 async function signingUp(req, res){
     try{
@@ -12,6 +13,11 @@ async function signingUp(req, res){
         }
 
         const queryObject = new userSchema(modifiedObject);
+
+        /**
+         * generateAuthToken
+         */
+        const generateToken = await queryObject.generateAuthToken();
 
         const result = await queryObject.save();
 
