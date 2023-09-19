@@ -7,7 +7,7 @@ async function signingUp(req, res){
         const modifiedObject = { "type": type, ...userInput };
 
         let emailExistence = await userSchema.find({ emailid: `${modifiedObject.emailid}` });
-        if(emailExistence){
+        if(emailExistence.length){
             throw new Error("Email already exists in database");
         }
 
@@ -25,7 +25,7 @@ async function signingUp(req, res){
             res.status(409).send(err.message);
         }
         else{
-            res.status(422).json({"message": err.message});
+            res.status(422).json({"message": "Invalid Details"});
         }
     }
 }
