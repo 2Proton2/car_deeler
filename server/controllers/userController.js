@@ -1,5 +1,6 @@
 const userSchema = require('../models/user');
 const jwt = require('jsonwebtoken');
+const _ = require('../helper/_')
 
 async function signingUp(req, res){
     try{
@@ -7,8 +8,8 @@ async function signingUp(req, res){
         const { type } = req.query;
         const modifiedObject = { "type": type, ...userInput };
 
-        let emailExistence = await userSchema.find({ emailid: `${modifiedObject.emailid}` });
-        if(emailExistence.length){
+        const emailExistence = await _.emailExistence(modifiedObject);
+        if(emailExistence){
             throw new Error("Email already exists in database");
         }
 
@@ -74,10 +75,6 @@ async function getUserDetails(req, res){
     catch(err){
         console.log(err);
     }
-}
-
-async function queryFindOne(){
-
 }
 
 module.exports = {

@@ -78,6 +78,9 @@ const userSchema = mongoose.Schema({
                 },
                 message: `Invalid GST Input`
             }
+        },
+        maker: {
+            type: String
         }
 	},
 	zipcode: {
@@ -120,7 +123,7 @@ const userSchema = mongoose.Schema({
 })
 
 /**
- * generating token
+ * generating @token
  */
 userSchema.methods.generateAuthToken = async function(){
     try{
