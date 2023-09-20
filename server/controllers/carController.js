@@ -2,8 +2,13 @@ const carSchema = require('../models/car');
 
 async function getNew(req, res){
     try{
-        // const getAllNewCars = await carSchema.find('')
-        res.send({message : 'hey I want a NEW car'});
+        const newCar = await carSchema.find({version: "new"});
+        if(newCar.length > 0){
+            res.status(200).json(newCar);
+        }
+        else{
+            throw new Error("No Data");
+        }
     }
     catch(err){
         console.log(err)
@@ -13,8 +18,13 @@ async function getNew(req, res){
 
 async function getOld(req, res){
     try{
-        console.log('backend : hey I want a OLD car');
-        res.send({message : 'hey I want a OLD car'});
+        const oldCar = await carSchema.find({version: "old"});
+        if(oldCar.length > 0){
+            res.status(200).json(oldCar);
+        }
+        else{
+            throw new Error("No Data");
+        }
     }
     catch(err){
         console.log(err)
