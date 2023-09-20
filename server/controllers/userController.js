@@ -77,15 +77,21 @@ async function logUserIn(req, res){
             const admin = _.isAdmin(type);
 
             /**
-             * generate @token and set @cookie if headers donot consist of cookie
-             */            
-            if(!req.headers.cookie){
-                const generateToken = await emailExistence.userParams.generateAuthToken();
-                res.cookie("token", generateToken, {
-                    expires: new Date(Date.now() + 2592000000),
-                    httponly: true
-                })
-            }
+             * reset the browser @cookie
+             */
+            res.cookie("token", "",{
+                expires: new Date(0)
+            });
+
+            /**
+             * generate @token and set @cookie
+             */
+            const generateToken = await emailExistence.userParams.generateAuthToken();
+            res.cookie("token", generateToken, {
+                expires: new Date(Date.now() + 2592000000),
+                httponly: true
+            });
+
             res.status(200).send({message : 'Successfully logged in'});
         }
         else{
