@@ -7,6 +7,10 @@ const carSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    version: {
+        type: String,
+        required: true
+    },
     carname: {
         type: String,
         required: true
@@ -16,7 +20,7 @@ const carSchema = mongoose.Schema({
         required: true
     },
 	manufacturingyear: {
-        type: Number,
+        type: Date,
         required: true
     },
 	maker: {
@@ -40,7 +44,7 @@ const carSchema = mongoose.Schema({
         required: true
     },
 	groundclearance: {
-        type: Number,
+        type: String,
         required: true
     },
 	description: {
@@ -49,62 +53,47 @@ const carSchema = mongoose.Schema({
     },
 	newcardetails : {
 		mileage:{
-            type: Number,
-            required: true
+            type: String
         },
 		dimensions:{
-            type: String,
-            required: true
+            type: String
         },
 		price:{
-            type: Number,
-            required: true
+            type: String
         },
 		transmission:{
-            type: String,
-            required: true
+            type: String
         },
 		engine:{
-            type: String,
-            required: true
+            type: String
         },
 		power:{
-            type: Number,
-            required: true
+            type: String
+        },
+        torque:{
+            type: String
         }
 	},
 	customercardetails : {
 		owner: {
-            type: String,
-            required: true
+            type: String
         },
 		purchasedate: {
-            type: Date,
-            required: true
+            type: Date
         },
 		expectedprice: {
-            type: Number,
-            required: true
+            type: String
         },
 		accidentcase: {
-            type: Boolean,
-            required: true
+            type: Boolean
         },
 		paperavailability: {
-            type: Boolean,
-            required: true
+            type: Boolean
         },
 	},
 	photos : {
         type : Array,
-        validate: {
-            validator : (value) => {
-                if(!(value.length === 4)){
-                    throw new Error(`%%% All required images are uploaded %%%`);
-                }
-            },
-            message: `Please upload all the required images`
-        }
+        required: true
     }
 })
 

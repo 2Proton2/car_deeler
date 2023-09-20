@@ -1,10 +1,13 @@
+const carSchema = require('../models/car');
+
 async function getNew(req, res){
     try{
-        console.log('backend : hey I want a NEW car');
+        // const getAllNewCars = await carSchema.find('')
         res.send({message : 'hey I want a NEW car'});
     }
     catch(err){
         console.log(err)
+        res.status(422).send("Invalid Input");
     }
 }
 
@@ -15,6 +18,7 @@ async function getOld(req, res){
     }
     catch(err){
         console.log(err)
+        res.status(422).send("Invalid Input");
     }
 }
 
@@ -25,6 +29,7 @@ async function getNewParticular(req, res){
     }
     catch(err){
         console.log(err)
+        res.status(422).send("Invalid Input");
     }
 }
 
@@ -35,6 +40,7 @@ async function getOldParticular(req, res){
     }
     catch(err){
         console.log(err)
+        res.status(422).send("Invalid Input");
     }
 }
 
@@ -45,6 +51,7 @@ async function applyForNewCar(req, res){
     }
     catch(err){
         console.log(err)
+        res.status(422).send("Invalid Input");
     }
 }
 
@@ -55,16 +62,31 @@ async function applyForOldCar(req, res){
     }
     catch(err){
         console.log(err)
+        res.status(422).send("Invalid Input");
     }
 }
 
 async function addCar(req, res){
     try{
-        console.log('backend : Adding a New car', req.params.name);
-        res.send({message : `Adding a New car ${req.params.name}`});
+        const missingField = Object.keys(req.body).filter((e) => !(req.body[e]));
+        const { type } = req.query;
+        
+        if(missingField.length > 0){
+            throw new Error("Please fill all the details");
+        }
+
+        const modifiedCarObj = {type, ...req.body};
+
+        const carInstance = new carSchema(modifiedCarObj);
+
+        const result = await carInstance.save();
+
+        console.log("Added Car Successfully");
+        res.send({message : "Car Added Successfully"});
     }
     catch(err){
         console.log(err)
+        res.status(422).send("Invalid Input");
     }
 }
 
@@ -75,6 +97,7 @@ async function getMyInventoryCarList(req, res){
     }
     catch(err){
         console.log(err)
+        res.status(422).send("Invalid Input");
     }
 }
 
@@ -85,6 +108,7 @@ async function updateACar(req, res){
     }
     catch(err){
         console.log(err)
+        res.status(422).send("Invalid Input");
     }
 }
 
