@@ -32,25 +32,29 @@ async function getOld(req, res){
     }
 }
 
-async function getNewParticular(req, res){
+async function getCarParticular(req, res){
     try{
-        console.log('backend : hey I want a NEW PARTICULAR car', req.params.name);
-        res.send({message : `hey I want a NEW PARTICULAR car ${req.params.name}`});
+        const carName = req.params.name;
+        const { id } = req.query;
+        const carDetails = await carSchema.find({
+            carname: `${carName}`,
+            _id: id
+        });
+        if(carDetails){
+            res.status(200).json(carDetails);
+        }
+        else{
+            throw new Error("Invalid Input");
+        }
     }
     catch(err){
         console.log(err)
-        res.status(422).send("Invalid Input");
-    }
-}
-
-async function getOldParticular(req, res){
-    try{
-        console.log('backend : hey I want a OLD PARTICULAR car', req.params.name);
-        res.send({message : `hey I want a OLD PARTICULAR car ${req.params.name}`});
-    }
-    catch(err){
-        console.log(err)
-        res.status(422).send("Invalid Input");
+        if(err.message === "Invalid Input"){
+            res.status(422).send({message: err.message});
+        }
+        else{
+            res.status(422).send("Cannot able to process the req")
+        }
     }
 }
 
@@ -125,8 +129,7 @@ async function updateACar(req, res){
 module.exports = {
     getNew,
     getOld,
-    getNewParticular,
-    getOldParticular,
+    getCarParticular,
     applyForNewCar,
     applyForOldCar,
     addCar,

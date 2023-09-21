@@ -25,18 +25,11 @@ router.get('/new', carController.getNew);
 router.get('/old', carController.getOld);
 
 /**
- * I have selected new @particular car
+ * I have selected new @particular or @particular car
  * I just want to see the car details. I am not applying for the further enqury
  * More Details button
  */
-router.get('/new/:name', carController.getNewParticular);
-
-/**
- * I have selected old @particular car
- * I just want to see the car details. I am not applying for the further enqury
- * More Details button
- */
-router.get('/old/:name', carController.getOldParticular);
+router.get('/:name', carController.getCarParticular);
 
 /**
  * registering for @old car / applying for @old car
