@@ -61,8 +61,8 @@ async function getCarParticular(req, res){
 
 async function applyForCar(req, res){
     try{
-        
-        res.status(200).send({message : `User is authenticated`});
+        console.log(`User is authenticated`)
+        getCarParticular(req, res);
     }
     catch(err){
         console.log(err)
