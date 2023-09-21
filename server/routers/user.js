@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const _auth = require('../middlewares/auth')
+const _auth = require('../middlewares/auth');
 
 const middleware = async function(req, res, next){
     try{

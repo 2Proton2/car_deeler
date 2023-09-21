@@ -85,6 +85,7 @@ async function logUserIn(req, res){
 
             /**
              * generate @token and set @cookie
+             * expires after 30 days
              */
             const generateToken = await emailExistence.userParams.generateAuthToken();
             res.cookie("token", generateToken, {

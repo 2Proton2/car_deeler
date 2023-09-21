@@ -1,6 +1,7 @@
 const express = require('express');
 const router =  express.Router();
 const carController = require('../controllers/carController');
+const _auth = require('../middlewares/auth');
 
 const middleware = async function(req, res, next){
     try{
@@ -36,14 +37,7 @@ router.get('/:name', carController.getCarParticular);
  * enquiring for selected @old car
  * Clicking on apply button 
  */
-router.get('/old/:name/apply', /*middleware('check whether the user is signned or not ..if yes bring the enquirer name, selectedcar, registereddata'),*/ carController.applyForOldCar);
-
-/**
- * registering for @new car / applying for @new car
- * enquiring for selected @new car
- * Clicking on apply button
- */
-router.get('/new/:name/apply', /*middleware('check whether the user is signned or not ..if yes bring the enquirer name, selectedcar, registereddata'),*/ carController.applyForNewCar);
+router.get('/apply/:name', _auth.authentication, carController.applyForCar);
 
 /**
  * user/dealer wants to @add their car into their inventory list

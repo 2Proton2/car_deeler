@@ -1,4 +1,5 @@
 const carSchema = require('../models/car');
+const userSchema = require('../models/user');
 
 async function getNew(req, res){
     try{
@@ -58,25 +59,14 @@ async function getCarParticular(req, res){
     }
 }
 
-async function applyForNewCar(req, res){
+async function applyForCar(req, res){
     try{
-        console.log('backend : hey I am enquiring for a NEW PARTICULAR car', req.params.name);
-        res.send({message : `hey I am enquiring for a NEW PARTICULAR car ${req.params.name}`});
+        
+        res.status(200).send({message : `User is authenticated`});
     }
     catch(err){
         console.log(err)
-        res.status(422).send("Invalid Input");
-    }
-}
-
-async function applyForOldCar(req, res){
-    try{
-        console.log('backend : Adding a Old car', req.params.name);
-        res.send({message : `Adding a old car ${req.params.name}`});
-    }
-    catch(err){
-        console.log(err)
-        res.status(422).send("Invalid Input");
+        res.status(422).send({message: err.message});
     }
 }
 
@@ -130,8 +120,7 @@ module.exports = {
     getNew,
     getOld,
     getCarParticular,
-    applyForNewCar,
-    applyForOldCar,
+    applyForCar,
     addCar,
     getMyInventoryCarList,
     updateACar
