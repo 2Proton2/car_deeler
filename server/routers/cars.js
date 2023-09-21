@@ -43,18 +43,18 @@ router.get('/apply/:name', _auth.authentication, carController.applyForCar);
  * user/dealer wants to @add their car into their inventory list
  * clicks on add button
  */
-router.post('/add-car', /*middleware('first check who wants to add customer/admin ... based on that DB schema is decided'),*/ carController.addCar);
+router.post('/add-car', _auth.authentication, /*middleware('first check who wants to add customer/admin ... based on that DB schema is decided'),*/ carController.addCar);
 
 /**
  * Bring me my @inventory_list
  * This will show all the cars which are being added into the inventory list
  */
-router.get('/user-inventory', /*middleware('check customer/admin, then show the number of cars'),*/ carController.getMyInventoryCarList);
+router.get('/user-inventory', _auth.authentication,/*middleware('check customer/admin, then show the number of cars'),*/ carController.getMyInventoryCarList);
 
 /**
  * @update an inventory item.
  * clicks on @update button after editing the items
  */
-router.patch('/update',/*middle('check customer/admin, then do the entry in table depending on the schema for admin/customer'),*/ carController.updateACar);
+router.patch('/update', _auth.authentication,/*middle('check customer/admin, then do the entry in table depending on the schema for admin/customer'),*/ carController.updateACar);
 
 module.exports = router;

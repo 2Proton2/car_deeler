@@ -23,7 +23,7 @@ router.post('/signup', userController.signingUp);
  * profile need to be @updated
  * clicking on update button when user is done with his changes
  */
-router.patch('/udpate', /*middleware('check the whether users is genuine, entry must be updated based on login type admin/customers'),*/ userController.updateUserDetails);
+router.patch('/udpate', _auth.authentication, /*middleware('check the whether users is genuine, entry must be updated based on login type admin/customers'),*/ userController.updateUserDetails);
 
 /**
  * @login
@@ -40,6 +40,6 @@ router.post('/forgot-password',/* middleware('will take the email and send OTP o
  * to show @profile details
  * when user clicks on profile button
  */
-router.get('/profile-details', /*middleware('based on login type, bring the details'),*/ userController.getUserDetails);
+router.get('/profile-details', _auth.authentication, /*middleware('based on login type, bring the details'),*/ userController.getUserDetails);
 
 module.exports = router;
