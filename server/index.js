@@ -15,10 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 /**
  * My endpoints of the website  @routes
  */
-app.use('/cars', require('./routers/cars'));
-app.use('/user', require('./routers/user'));
-app.use('/enquiry', require('./routers/enquiry'));
-app.use('/dealer', require('./routers/dealer'));
+app.use('/cars', require('./routers/carsRoute'));
+app.use('/user', require('./routers/userRoute'));
+app.use('/enquiry', require('./routers/enquiryRoute'));
+app.use('/dealer', require('./routers/dealerRoute'));
 
 /**
  * Hey buddy!! I am listening @port 

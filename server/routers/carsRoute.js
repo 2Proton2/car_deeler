@@ -3,17 +3,6 @@ const router =  express.Router();
 const carController = require('../controllers/carController');
 const _auth = require('../middlewares/auth');
 
-const middleware = async function(req, res, next){
-    try{
-        console.log('I am the middleware which will authenticate whether the user is logged in or not for executing the callback');
-        return next(); // Correct way to call next
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-
 
 /**
  * navigate me to @new cars
@@ -30,7 +19,7 @@ router.get('/old', carController.getOld);
  * I just want to see the car details. I am not applying for the further enqury
  * More Details button
  */
-router.get('/:name', carController.getCarParticular);
+router.get('/particular/:name', carController.getCarParticular);
 
 /**
  * registering for @old car / applying for @old car
@@ -49,7 +38,7 @@ router.post('/add-car', _auth.authentication, /*middleware('first check who want
  * Bring me my @inventory_list
  * This will show all the cars which are being added into the inventory list
  */
-router.get('/user-inventory', _auth.authentication,/*middleware('check customer/admin, then show the number of cars'),*/ carController.getMyInventoryCarList);
+router.get('/user-inventory',  _auth.authentication, carController.getMyInventoryCarList);
 
 /**
  * @update an inventory item.
