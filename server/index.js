@@ -17,7 +17,6 @@ app.use(express.urlencoded({ extended: true }));
  */
 app.use('/cars', require('./routers/carsRoute'));
 app.use('/user', require('./routers/userRoute'));
-app.use('/enquiry', require('./routers/enquiryRoute'));
 app.use('/dealer', require('./routers/dealerRoute'));
 
 /**
