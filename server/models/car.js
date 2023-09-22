@@ -15,6 +15,10 @@ const carSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    userid: {
+        type: String,
+        required: true
+    },
 	variant: {
         type: String,
         required: true
