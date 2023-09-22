@@ -41,6 +41,8 @@ const authentication = async function(req, res, next){
             if(!tokenValidation){
                 throw new Error("Authentication Failed");
             }
+            req.userid = tokenVerfication.id;
+            req.validatedToken = token;
             next();
         }
     }

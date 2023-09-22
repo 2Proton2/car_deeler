@@ -74,12 +74,13 @@ async function addCar(req, res){
     try{
         const missingField = Object.keys(req.body).filter((e) => !(req.body[e]));
         const { type } = req.query;
+        const { userid } = req.userid;
         
         if(missingField.length > 0){
             throw new Error("Please fill all the details");
         }
 
-        const modifiedCarObj = {type, ...req.body};
+        const modifiedCarObj = {type, userid, ...req.body};
 
         const carInstance = new carSchema(modifiedCarObj);
 
@@ -96,8 +97,16 @@ async function addCar(req, res){
 
 async function getMyInventoryCarList(req, res){
     try{
-        console.log('backend : bring all your inventory list', req.params.name);
-        res.send({message : `bring all your inventory list ${req.params.name}`});
+        const { userid } = req;
+
+        const userInventory = await carSchema.find({ userid: `${userid}` });
+        
+        if(userInventory){
+            res.status(200).json(userInventory)
+        }
+        else{
+            res.send(200).send("Inventory is empty")
+        }
     }
     catch(err){
         console.log(err)
