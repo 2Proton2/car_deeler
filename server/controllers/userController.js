@@ -1,7 +1,7 @@
 const userSchema = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const _ = require('../helper/_')
+const _ = require('../helper/_');
 
 async function signingUp(req, res){
     try{

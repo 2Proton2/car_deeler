@@ -14,9 +14,20 @@ const enquirySchema = mongoose.Schema({
         type: String,
         required: true
     },
+    mode: {
+        type: String,
+        required: true
+    },
     ack: {
         type: Boolean,
         default: false
+    },
+    enquirername:{
+        type: String,
+        required: true
+    },
+    visitingdate:{
+        type: Date,
     }
 });
 
