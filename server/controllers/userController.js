@@ -123,22 +123,29 @@ async function logUserOut(req, res){
 async function forgotPassword(req, res){
     try{
         console.log('backend : sending the reset link');
-        res.send({message : 'sending the reset link'});
+        res.json({message : 'sending the reset link'});
     }
     catch(err){
         console.log(err);
-        res.status(422).send({ message: err.message })
+        res.status(422).json({ message: err.message })
     }
 }
 
 async function getUserDetails(req, res){
     try{
-        console.log('backend : bringing the user details');
-        res.send({message : 'bringing the user details'});
+        const { userid } = req;
+        const userDetails = await userSchema.find({ userid: `${userid}` });
+
+        if(userDetails){
+            res.status(200).json(userDetails)
+        }
+        else{
+            res.send(200).json({message: "Unprocessable Entity"});
+        }
     }
     catch(err){
         console.log(err);
-        res.status(422).send({ message: err.message })
+        res.status(422).json({ message: err.message })
     }
 }
 

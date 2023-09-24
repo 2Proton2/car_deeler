@@ -105,7 +105,7 @@ async function getMyInventoryCarList(req, res){
             res.status(200).json(userInventory)
         }
         else{
-            res.send(200).send("Inventory is empty")
+            res.send(200).json({message: "Inventory is empty"});
         }
     }
     catch(err){
