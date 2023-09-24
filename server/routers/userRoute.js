@@ -29,7 +29,13 @@ router.patch('/udpate', _auth.authentication, /*middleware('check the whether us
  * @login
  * clicking on login button
  */
-router.post('/login', _auth.checkAllParams, userController.logUserIn)
+router.post('/login', _auth.checkAllParams, userController.logUserIn);
+
+/**
+ * @logout
+ * clicking on login button
+ */
+router.post('/logout', _auth.authentication, userController.logUserOut);
 
 /**
  * @forgot_password

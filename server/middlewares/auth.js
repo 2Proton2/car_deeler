@@ -20,7 +20,7 @@ const checkAllParams = function(req, res, next) {
 const authentication = async function(req, res, next){
     try{
         const headersRawData = req.headers;
-        let rawToken = headersRawData.cookie
+        let rawToken = headersRawData.cookie;
         const token = rawToken.split('=')[1].trim();
         const tokenVerfication = jwt.verify(token, SECRET_KEY);
         
@@ -41,6 +41,7 @@ const authentication = async function(req, res, next){
             if(!tokenValidation){
                 throw new Error("Authentication Failed");
             }
+            console.log('token => ', tokenVerfication);
             req.userid = tokenVerfication.id;
             req.validatedToken = token;
             next();

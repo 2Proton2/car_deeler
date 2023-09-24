@@ -104,6 +104,22 @@ async function logUserIn(req, res){
     }
 }
 
+async function logUserOut(req, res){
+    try{
+        const userid = req.userid;
+
+        res.cookie(
+            'token', 
+            '', 
+            { expires: new Date(0) 
+        })
+        .sendStatus(200);
+    }
+    catch(err){
+        res.status(422).send({ message: err.message })
+    }
+}
+
 async function forgotPassword(req, res){
     try{
         console.log('backend : sending the reset link');
@@ -131,5 +147,6 @@ module.exports = {
     updateUserDetails,
     logUserIn,
     forgotPassword,
-    getUserDetails
+    getUserDetails,
+    logUserOut
 };
