@@ -33,7 +33,7 @@ router.get('/apply/:name', _auth.authentication, carController.applyForCar);
  * user/dealer wants to @add their car into their inventory list
  * clicks on add button
  */
-router.post('/add-car', _auth.authentication, /*middleware('first check who wants to add customer/admin ... based on that DB schema is decided'),*/ carController.addCar);
+router.post('/add-car', _auth.authentication, carController.addCar);
 
 /**
  * Bring me my @inventory_list
@@ -45,7 +45,7 @@ router.get('/user-inventory',  _auth.authentication, carController.getMyInventor
  * @update an inventory item.
  * clicks on @update button after editing the items
  */
-router.patch('/update', _auth.authentication,/*middle('check customer/admin, then do the entry in table depending on the schema for admin/customer'),*/ carController.updateACar);
+router.patch('/update', _auth.authentication, carController.updateACar);
 
 
 
@@ -56,22 +56,23 @@ router.patch('/update', _auth.authentication,/*middle('check customer/admin, the
  * creates enquiry
  * clicking on apply button of enquiry form
  */
-router.post('/create-enquiry', /*middleware('check which enquiry is it for new or old car and is he selling or buying the car ? : based on that format will be decided ... also email should be sent on successful enquiry to user and a notification should receive to dealer'),*/ enquiryController.createEnquiry);
+router.post('/create-enquiry', _auth.authentication, enquiryController.createEnquiry);
 
 /**
  * get the enquiry
  */
-router.get('/get-enquiry', /*middleware('bring down all the enquiries for the respective logged in dealer'),*/ enquiryController.getEnquiry);
+router.get('/get-enquiry', _auth.authentication, enquiryController.getEnquiry);
 
 /**
  * get particular enquiry
  */
-router.get('/get-particular-enquiry', /*middleware('bring the details for clicked enquiry'),*/ enquiryController.getParticularEnquiry);
+router.get('/get-particular-enquiry', _auth.authentication, enquiryController.getParticularEnquiry);
 
 /**
  * deletes the enquiry for @X (close) and @Decline buttons while for @accept it will keep in the DB.
  */
-router.post('ack-enquiry', /*middleware('check the user is admin or not, for customer applied for buying(if declined is clicked then rejection email should be triggerred to the respective client and enquiry should be deleted while if "x(close)" symbol is clicked then only enquiry must be deleted no email should be triggered while if accept is clicked then email should be triggered for the respective customer but enquiry will not be deleted unless close button is not clicked), for customer applied for selling(clicked on dealdone then email should be triggered to both deal and customer for reference and if send is clicked then only customer side email should be triggered as dealer wants to negotiate and if close button is clicked then enquiry should be deleted from the table)'),*/ enquiryController.enquiryAcknowledgement);
+router.post('/ack-enquiry', _auth.authentication, enquiryController.enquiryAcknowledgement);
 
+router.post('/delete-particular-enquiry', _auth.authentication, enquiryController.deleteEnquiry);
 
 module.exports = router;
