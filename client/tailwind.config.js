@@ -9,7 +9,10 @@ export default {
     colors:{
       'logoBlue': '#084D84',
       'customGray': '#E7E6E6',
-      'lightBlue': '#D8E2F3'
+      'lightBlue': '#D8E2F3',
+      'red': '#FF0000',
+      'white': '#FFFFFF',
+      'black': '#000000'
     }
   },
   plugins: [],
