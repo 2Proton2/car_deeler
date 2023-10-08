@@ -7,6 +7,7 @@ import Contact from './pages/contact/index';
 import Login from './pages/login/index';
 import Signin from './pages/sign/index';
 import Profile from './pages/profile/index';
+import Advertise from './pages/advertise/index';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path='login' element={<Login />} />
             <Route path='sign' element={<Signin />} />
             <Route path='profile' element={<Profile />} />
+            <Route path='advertise' element={<Advertise />}/>
           </Route>
           <Route>
             <Route />

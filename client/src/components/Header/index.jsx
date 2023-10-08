@@ -23,6 +23,7 @@ const Nav = () => {
             <NavLink to="/about" className="mr-5 hover:cursor-pointer font-bold text-logoBlue" >About</NavLink>
             <NavLink to="/contact" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Contact</NavLink>
             <NavLink to="/login" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Login</NavLink>
+            <NavLink to="/advertise" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Advertise</NavLink>
           </nav>
         </div>
       </header>
