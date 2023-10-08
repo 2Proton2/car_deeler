@@ -4,27 +4,25 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
+import './css/index.css'
 
 const index = () => {
     return (
-        <div className='h-screen bg-red'>
+        <div className='h-screen bg-white'>
             <Swiper
                 spaceBetween={50}
                 slidesPerView={1}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
                 modules={[Autoplay, Pagination, Navigation]}
-                pagination={{
-                    clickable: true,
-                }}
                 navigation={true}
                 centeredSlides={true}
                 loop={true}
                 autoplay={{
-                    delay: 2500,
+                    delay: 5500,
                     disableOnInteraction: false,
                 }}
-                className='my-52'
+                className='my-52 swiper-btn'
             >
                 <SwiperSlide>
                     <div className='flex flex-row justify-between bg-white px-60 self-center'>
@@ -35,7 +33,7 @@ const index = () => {
                             <br />
                             <span className='text-xl font-bold'>starts from Rs 12.49 lakhs</span>
                             <br />
-                            <button className="inline-flex w-auto mb-6 text-white font-bold bg-red border-0 py-2 px-6 shadow shadow-red focus:outline-none hover:bg-hoverRed rounded-lg text-xl">
+                            <button className="inline-flex w-auto mb-6 text-white font-bold bg-red border-0 py-2 px-6 mt-8 shadow shadow-red focus:outline-none hover:bg-hoverRed rounded-lg text-xl">
                                 More Details
                             </button>
                         </div>

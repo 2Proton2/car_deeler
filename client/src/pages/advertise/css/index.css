@@ -1,0 +1,9 @@
+.swiper-btn{
+    --swiper-navigation-size: 22px;
+    --swiper-theme-color: white;
+}
+
+.swiper-button-prev:after, .swiper-button-next:after{
+    padding: 5px;
+    background-color: black;
+}
