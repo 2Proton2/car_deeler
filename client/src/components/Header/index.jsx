@@ -22,7 +22,18 @@ const Nav = () => {
             <NavLink to="/" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Home</NavLink>
             <NavLink to="/about" className="mr-5 hover:cursor-pointer font-bold text-logoBlue" >About</NavLink>
             <NavLink to="/contact" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Contact</NavLink>
-            <NavLink to="/login" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Login</NavLink>
+            {
+              (isLogin) ?
+              <NavLink to="/user/logout" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Logout</NavLink>
+                :
+              <NavLink to="/user/login" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Login</NavLink>
+            }
+            {
+              (isLogin) ?
+              <NavLink to="/profile" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Profile</NavLink>
+              :
+              <></>
+            }
             <NavLink to="/advertise" className="mr-5 hover:cursor-pointer font-bold text-logoBlue">Advertise</NavLink>
           </nav>
         </div>
