@@ -1,12 +1,16 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import logo from '../../assets/components/Nav/logo/logo.png'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import userSlice, { setUserType } from '../../store/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import logo from '../../assets/components/Nav/logo/logo.png';
 
 const index = () => {
   const navigateTo = useNavigate();
+  const dispatch = useDispatch();
 
   const handleButtonClick = (type) => {
     navigateTo(`/user/login/${type}`)
+    dispatch(setUserType(type));
   };
 
   return (
