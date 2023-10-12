@@ -2,7 +2,7 @@ const userSchema = require("../models/user");
 
 async function getAllDealer(req, res){
     try{
-        const allDealers = await userSchema.find({ type: "dealer" });
+        const allDealers = await userSchema.find({ type: "admin" });
         res.status(200).json(allDealers);
 
         if(!allDealers){

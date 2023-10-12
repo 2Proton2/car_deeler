@@ -1,7 +1,7 @@
 const userSchema = require('../models/user');
 
 const isAdmin = function isAdmin(type){
-    return (type === "dealer") ? true : false;
+    return (type === "admin") ? true : false;
 }
 
 const emailExistence = async function emailExistence(incoming){

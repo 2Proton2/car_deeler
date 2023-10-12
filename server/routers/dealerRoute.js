@@ -7,6 +7,6 @@ const _auth = require("../middlewares/auth");
  * Only customer will able to do such kind of req
  * this will be requested when customer clicks on @apply button shown on his inventory list
  */
-router.get('/all-dealer', _auth.authentication, dealerController.getAllDealer);
+router.get('/all-admin', _auth.authentication, dealerController.getAllDealer);
 
 module.exports = router;

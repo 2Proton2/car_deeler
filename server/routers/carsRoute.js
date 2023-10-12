@@ -30,7 +30,7 @@ router.get('/particular/:name', carController.getCarParticular);
 router.get('/apply/:name', _auth.authentication, carController.applyForCar);
 
 /**
- * user/dealer wants to @add their car into their inventory list
+ * user/admin wants to @add their car into their inventory list
  * clicks on add button
  */
 router.post('/add-car', _auth.authentication, carController.addCar);

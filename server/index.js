@@ -30,7 +30,7 @@ app.use(cors(corsOptions));
  */
 app.use('/cars', require('./routers/carsRoute'));
 app.use('/user', require('./routers/userRoute'));
-app.use('/dealer', require('./routers/dealerRoute'));
+app.use('/admin', require('./routers/dealerRoute'));
 
 /**
  * Hey buddy!! I am listening @port 
