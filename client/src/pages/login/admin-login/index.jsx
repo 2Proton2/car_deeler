@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import userAPI from '../../../service/userService';
+import { setAuth } from '../../../store/slices/authSlice';
+import { useDispatch } from 'react-redux';
 
 const index = () => {
+    const dispatch = useDispatch();
     let [input, setInput] = useState({
-        email: "",
+        emailid: "",
         password: "",
         type: 'admin'
     });
@@ -16,6 +20,34 @@ const index = () => {
         })
     }
     
+    const anyEmptyInputs = (ctxt) => {
+        let missingFields = Object.keys(ctxt).filter((e) => !(ctxt[e]));
+        return (missingFields.length) ? true : false;
+    }
+
+    function getCookie(cookieName){
+        const token = document.cookie.split('=')[1];
+        return token;
+    }
+
+    async function fetchUserData(ctxt){
+        let allFieldCheck = anyEmptyInputs(ctxt);
+        if(!allFieldCheck){
+            try{
+                let result = await userAPI.login(ctxt, ctxt.type)
+                if( result.response === 200 ){
+                    const token = getCookie('token');
+                    dispatch(setAuth(token));
+                }
+            } catch(err) {
+                console.log(err);
+            }
+            
+        }
+    }
+
+    
+
     return (
         <section className="bg-customGray">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -26,8 +58,8 @@ const index = () => {
                         </h1>
                         <form className="space-y-4 md:space-y-6" action="#">
                             <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-logoBlue dark:text-white">Your email</label>
-                                <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@domain.com" value={input.email} onChange={inputChangeMethod} required={true} />
+                                <label htmlFor="emailid" className="block mb-2 text-sm font-medium text-logoBlue dark:text-white">Your email</label>
+                                <input type="emailid" name="emailid" id="emailid" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@domain.com" value={input.emailid} onChange={inputChangeMethod} required={true} />
                             </div>
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-logoBlue dark:text-white">Password</label>
@@ -44,7 +76,7 @@ const index = () => {
                                 </div>
                                 <a href="#" className="text-sm font-medium text-red hover:underline dark:text-primary-500">Forgot password?</a>
                             </div>
-                            <button type="submit" className="w-full text-white bg-logoBlue hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
+                            <button type="submit" className="w-full text-white bg-logoBlue hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={() => fetchUserData(input)}>Sign in</button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Don’t have an account yet? <a href="#" className="font-medium text-logoBlue hover:underline dark:text-primary-500">Sign up</a>
                             </p>
