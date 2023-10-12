@@ -12,7 +12,7 @@ const carService = {};
 
 carService.addCar = async function(obj, userType){
     try{
-        const response = await axiosInstance.post(`http://localhost:4000/cars/add-car?type=${userType}`, obj);
+        const response = await axiosInstance.post(`/cars/add-car?type=${userType}`, obj);
         return{
             response: response.status,
             data: response.data
@@ -30,7 +30,7 @@ carService.addCar = async function(obj, userType){
  */
 carService.getCars = async function(carType){
     try{
-        const response = await axiosInstance.get(`http://localhost:4000/cars/${carType}`);
+        const response = await axiosInstance.get(`/cars/${carType}`);
         return{
             response: response.status,
             data: response.data
@@ -49,7 +49,7 @@ carService.getCars = async function(carType){
  */
 carService.getParticularCar = async function(carName, carId){
     try{
-        const response = await axiosInstance.get(`http://localhost:4000/cars/particular/${carName}?id=${carId}`);
+        const response = await axiosInstance.get(`/cars/particular/${carName}?id=${carId}`);
         return{
             response: response.status,
             data: response.data

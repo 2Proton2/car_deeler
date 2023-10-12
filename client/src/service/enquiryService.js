@@ -10,7 +10,7 @@ const enquiryService = {};
  */
 enquiryService.createEnquiry = async function(obj, mode){
     try{
-        const response = await axiosInstance.post(`http://localhost:4000/cars/create-enquiry?mode=${mode}`, obj);
+        const response = await axiosInstance.post(`/cars/create-enquiry?mode=${mode}`, obj);
         return{
             response: response.status,
             data: response.data
@@ -27,7 +27,7 @@ enquiryService.createEnquiry = async function(obj, mode){
  */
 enquiryService.getAllEnquiry = async function(){
     try{
-        const response = await axiosInstance.get(`http://localhost:4000/cars/get-enquiry`);
+        const response = await axiosInstance.get(`/cars/get-enquiry`);
         return{
             response: response.status,
             data: response.data
@@ -45,7 +45,7 @@ enquiryService.getAllEnquiry = async function(){
  */
 enquiryService.getParticularEnquiry = async function(enquiryId){
     try{
-        const response = await axiosInstance.get(`http://localhost:4000/cars/get-particular-enquiry?id=${enquiryId}`);
+        const response = await axiosInstance.get(`/cars/get-particular-enquiry?id=${enquiryId}`);
         return{
             response: response.status,
             data: response.data
@@ -65,7 +65,7 @@ enquiryService.getParticularEnquiry = async function(enquiryId){
  */
 enquiryService.ackEnquiry = async function(obj, enquiryId, response){
     try{
-        const response = await axiosInstance.post(`http://localhost:4000/cars/ack-enquiry?id=${enquiryId}&response=${response}`, obj);
+        const response = await axiosInstance.post(`/cars/ack-enquiry?id=${enquiryId}&response=${response}`, obj);
         return{
             response: response.status,
             data: response.data
@@ -84,7 +84,7 @@ enquiryService.ackEnquiry = async function(obj, enquiryId, response){
  */
 enquiryService.deleteEnquiry = async function(enquiryId, response){
     try{
-        const response = await axiosInstance.post(`http://localhost:4000/cars/delete-particular-enquiry?id=${enquiryId}&response=${response}`);
+        const response = await axiosInstance.post(`/cars/delete-particular-enquiry?id=${enquiryId}&response=${response}`);
         return{
             response: response.status,
             data: response.data

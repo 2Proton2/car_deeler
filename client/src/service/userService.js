@@ -31,7 +31,7 @@ userService.signup = async function(obj, userType){
  */
 userService.login = async function(obj, userType){
     try{
-        const response = await axiosInstance.post(`http://localhost:4000/user/login?type=${userType}`, obj);
+        const response = await axiosInstance.post(`/user/login?type=${userType}`, obj);
         return{
             response: response.status,
             data: response.data
@@ -48,7 +48,7 @@ userService.login = async function(obj, userType){
  */
 userService.logout = async function(){
     try{
-        const response = await axiosInstance.post(`http://localhost:4000/user/logout`);
+        const response = await axiosInstance.post(`/user/logout`);
         return{
             response: response.status,
             data: response.data
