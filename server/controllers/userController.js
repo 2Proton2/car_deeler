@@ -60,7 +60,7 @@ async function updateUserDetails(req, res){
 async function logUserIn(req, res){
     try{
         const { emailid, password } = req.body;
-        const { type } = req.param;
+        const { type } = req.query;
 
         const emailExistence = await _.emailExistence(req.body);
 
