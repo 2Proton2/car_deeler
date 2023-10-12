@@ -1,9 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../../assets/components/Nav/logo/logo.png'
-const Nav = () => {
+import { useSelector } from 'react-redux'
+import { setAuth } from '../../store/slices/authSlice'
 
-  let isLogin = false;
+const Nav = () => {
+  const isLogin = useSelector((state) => {
+    return state.authReducers.isAuthenticated
+  });
   return (
     <>
       <header className="text-gray-600 body-font">
