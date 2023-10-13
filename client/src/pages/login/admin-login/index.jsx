@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import userAPI from '../../../service/userService';
 import { setAuth } from '../../../store/slices/authSlice';
 import { useDispatch } from 'react-redux';
 
 const index = () => {
+    const navigateTo = useNavigate();
     const dispatch = useDispatch();
     let [input, setInput] = useState({
         emailid: "",
@@ -38,6 +40,7 @@ const index = () => {
                 if( result.response === 200 ){
                     const token = getCookie('token');
                     dispatch(setAuth(token));
+                    navigateTo(`/profile`)
                 }
             } catch(err) {
                 console.log(err);
