@@ -10,6 +10,8 @@ import Profile from './pages/profile/index';
 import Advertise from './pages/advertise/index';
 import Customer from './pages/login/customer-login/index';
 import Admin from './pages/login/admin-login/index';
+import Cars from './pages/cars/index';
+import Particular_car from './pages/particular_car/index';
 
 const App = () => {
   return (
@@ -27,14 +29,9 @@ const App = () => {
             <Route path='sign' element={<Signin />} />
             <Route path='profile' element={<Profile />} />
             <Route path='advertise' element={<Advertise />}/>
+            <Route path='cars' element={<Cars />} />
+            <Route path='cars/:carname/:id' element={<Particular_car />} />
           </Route>
-          <Route>
-            <Route />
-          </Route>
-          <Route>
-
-          </Route>
-          {/* car */}
         </Routes>
     </>
   )
