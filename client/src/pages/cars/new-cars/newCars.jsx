@@ -1,18 +1,35 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import carService from '../../../service/carService';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const newCars = (props) => {
-    let cars = props.data;
+const newCars = () => {
+    const [ cars, setCars ] = useState();
     const navigateTo = useNavigate();
+    const location = useLocation();
+    const params =  new URLSearchParams(location.search);
+    const version = params.get('version');
 
     const navigateToMoreDetails = (name, id) => {
-        navigateTo(`/cars/${name}/${id}`);
+        navigateTo(`/cars/${name}/${id}?version=${version}`);
     }
+
+    async function fetchCarsData(carVersion){
+        try {
+            let result = await carService.getCars(carVersion);
+            if( result.response === 200 ) setCars(result.data);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect( () => {
+        fetchCarsData(version);
+    }, [ version ] )
 
     return (
         <div className='flex flex-row flex-wrap'>
             {
-                cars.map((e) => {
+                cars && cars.map((e) => {
                     return (
                         <div className='p-1' key={e._id}>
                             <div>
